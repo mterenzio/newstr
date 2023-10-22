@@ -1,0 +1,44 @@
+<table cellspacing="0" cellpadding="0" border="0" align="center" width="640" style="background:#cfcfcf; height:1px;">
+      <tr>
+           <td style="font-size:0; line-height:0;">
+                &nbsp;
+           </td>
+      </tr>
+ </table>
+<table width="640px" cellspacing="3" cellpadding="3" border="0" align="center" role="presentation" style="margin:auto;width:640px;border-collapse:collapse;border:0;border-spacing:0;background:#ffffff;">
+    <tr>
+        <td colspan="10" height="15" style="height: 15px; line-height: 1px">&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left" valign="top">
+          <h3 style="font-size:24px;margin:0 0 10px 0;font-family:Arial,sans-serif;"><a href="<%= @article.metadata['url'] %>"><%= truncate(@article.metadata['title'], length: 250) %></a></h3>
+          <b><%= @article.metadata['author'] if @article.metadata['author'] %></b><%= "- " + @article.metadata['pub_date'] if @article.metadata['pub_date'] %></p>
+          <p><%= truncate(@article.metadata['description'], length: 500) %></p>
+        </td>  
+        <td align="right" valign="top">
+            <% if @article.metadata['image'] %>
+              <div style="height:150px; width:150px;"><img src="<%= @article.metadata['image'] %>" style="border-radius: 10px; max-height:150px; max-width:150px;" /></div>
+            <% end %>
+        </td>
+    </tr>
+    <tr><td><small><span style="color: grey">Shared by. . . </span></small></td></tr>
+    <tr>
+        <td>
+          <table cellspacing="3" cellpadding="3" border="0" role="presentation">
+          <tr>
+          <td width="30px" height="30px" margin="3px"><div style="line-height: 30px; vertical-align: middle; text-align: center; height: 30px; width: 30px; border-radius:10px; border: 1px #cfcfcf solid; overflow: hidden; background-color: #efefef; margin-right: 3px;"><%= @article.sources.count %></div></td>
+            <% @article.source_articles.first(10).each do |source_article| %>
+                <td width="30px" height="30px" margin="3px"><div style="line-height: 30px; vertical-align: middle; text-align: center; height: 30px; width: 30px; border-radius:10px; border: 1px #cfcfcf solid; overflow: hidden; background-color: #efefef; margin-right: 3px;"><a href="<%= status_link(source_article.status) %>"><img src="<%= source_article.source.profile['avatar'] %>" width="30px" height="30px" style="border-radius: 10px; margin-right: 3px;" /></a></div></td>
+            <% end %>
+          </tr>
+          </table>
+        </td>
+    <tr><td><a href="<%= @article.url %>">visit article</a></td></tr>
+</table>
+ <table cellspacing="0" cellpadding="0" border="0" align="center" width="640" style="background:#cfcfcf; height:1px;">
+      <tr>
+           <td style="font-size:0; line-height:0;">
+                &nbsp;
+           </td>
+      </tr>
+ </table>
