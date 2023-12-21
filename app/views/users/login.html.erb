@@ -1,0 +1,12 @@
+<h2>Log in</h2>
+
+<%= form_tag '/login' do %>
+  <div class="field">
+    <%= text_field_tag :npub %><br />
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Log in" %>
+  </div>
+<% end %>
+

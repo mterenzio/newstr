@@ -44,7 +44,25 @@ gem "bootsnap", require: false
 
 # Use Sass to process CSS
 gem "sassc-rails"
-
+# for http requests
+gem 'typhoeus'
+# for extracting urls
+gem "postrank-uri"
+# gets metadata
+gem 'metainspector'
+# for URIs
+gem 'addressable', '~> 2.8.1'
+# background jobs
+gem 'sidekiq'
+gem "sidekiq-unique-jobs"
+gem "sidekiq-scheduler"
+# headless chrome
+gem "ferrum"
+# Official SendinBlue API V2 Ruby GEM (https://www.sendinblue.com/)
+gem "sendinblue"
+gem 'friendly_id', '~> 5.4.0'
+gem 'appsignal'
+gem 'rails_autolink'
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 

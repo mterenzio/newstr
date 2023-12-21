@@ -1,0 +1,14 @@
+:scheduler:
+  :schedule:
+    schedule_users:
+      every: 24h
+      class: ScheduleFriendsJob
+    update_author_set:
+      every: 10 minutes
+      class: UpdateAuthorSetJob
+    process_events:
+      every: 10 minutes
+      class: ProcessEventsJob
+    schedule_daily_news:
+      cron:  0 13 * * *
+      class: ScheduleDailyNewsJob

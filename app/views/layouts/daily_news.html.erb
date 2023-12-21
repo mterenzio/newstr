@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+    <meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<meta name="x-apple-disable-message-reformatting">
+	<title>Readily News Digest</title>
+	<!--[if mso]> 
+<noscript> 
+<xml> 
+<o:OfficeDocumentSettings> 
+<o:PixelsPerInch>96</o:PixelsPerInch> 
+</o:OfficeDocumentSettings> 
+</xml> 
+</noscript> 
+<![endif]-->
+	<style style="margin:0;padding:0;">
+		table, td, div, h1, h2, h3, h4, h5, h6, p {font-family: Arial, sans-serif;}
+		table, td {border:0px solid #ffffff !important;}
+	</style>
+</head>
+  <body>
+   <table role="presentation" cellpadding="5" cellspacing="5" align="center" style="margin:auto;width:640px;border-collapse:collapse;border:0;border-spacing:0;background:#efefef;">
+    <tr>
+        <td colspan="3" height="5" style="height: 5px; line-height: 1px">&nbsp;</td>
+    </tr>
+    <tr>
+        <td width="5" style="width: 5px; line-height: 1px">&nbsp;</td>
+        <td align="left"><a href="https://newstr.news"><img src="<%= image_path("logo.png") %>" width="150px" alt="Newstr logo" /></a></td>
+        <td align="right">News Digest<br /> <%= Date.today.to_s %></td>
+        <td width="5" style="width: 5px; line-height: 1px">&nbsp;</td>
+    </tr>
+    <tr>
+        <td colspan="3" height="5" style="height: 5px; line-height: 1px">&nbsp;</td>
+    </tr>
+   </table>
+  </body>
+  <%= yield %>
+  <table role="presentation" cellpadding="5" cellspacing="5" align="center" style="margin:auto;width:640px;border-collapse:collapse;border:0;border-spacing:0;background:#efefef;">
+  <tr>
+      <td colspan="3" height="5" style="height: 5px; line-height: 1px">&nbsp;</td>
+  </tr>
+  <tr>
+      <td width="5" style="width: 5px; line-height: 1px">&nbsp;</td>
+      <td align="left"><% if @unsubscribe_token %>Don't like these emails? <a href="https://newstr.news/settings/unsubscribe/<%= @unsubscribe_token %>"><unsubscribe>Unsubscribe</unsubscribe></a>.<% end %></td>
+      <td align="middle"><a href="<%= @page_url %>">View latest in Browser</a></td>
+      <td align="right"><a href="<%= @feed_url %>">RSS</a></td>
+      <td width="5" style="width: 5px; line-height: 1px">&nbsp;</td>
+  </tr>
+  </table>
+  <table role="presentation" cellpadding="5" cellspacing="5" align="center" style="margin:auto;width:640px;border-collapse:collapse;border:0;border-spacing:0;background:#efefef;">
+  <tr>
+  <td width="5" style="width: 5px; line-height: 1px">&nbsp;</td>
+ <td align="middle"> © 2023 Riverbank Ventures LLC All Rights Reserved. 57 Westchester Ave, P.O. Box 474, Pound Ridge, NY 10576</td>
+ <td width="5" style="width: 5px; line-height: 1px">&nbsp;</td>
+  </tr>
+  <tr>
+      <td colspan="3" height="5" style="height: 5px; line-height: 1px">&nbsp;</td>
+  </tr>
+  </table>
+  </body>
+</html>

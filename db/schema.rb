@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_21_222840) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_16_191731) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,16 +20,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_222840) do
     t.jsonb "metadata"
     t.integer "share_count"
     t.string "title"
-    t.string "slug", null: false
+    t.string "slug"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
+    t.index ["url"], name: "index_articles_on_url", unique: true
   end
 
   create_table "source_articles", force: :cascade do |t|
     t.bigint "source_id"
     t.bigint "article_id"
     t.jsonb "note"
-    t.boolean "repost", default: false, null: false
+    t.boolean "is_repost", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_source_articles_on_article_id"
@@ -38,11 +40,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_222840) do
   end
 
   create_table "sources", force: :cascade do |t|
-    t.string "public_key", null: false
+    t.string "npub", null: false
+    t.string "public_key"
     t.jsonb "profile"
     t.boolean "active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["npub"], name: "index_sources_on_npub", unique: true
+    t.index ["public_key"], name: "index_sources_on_public_key", unique: true
   end
 
   create_table "user_sources", force: :cascade do |t|
@@ -56,9 +61,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_21_222840) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string "npub"
     t.string "public_key"
+    t.jsonb "profile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
+    t.boolean "subscribed_daily_email", default: false, null: false
+    t.index ["npub"], name: "index_users_on_npub", unique: true
+    t.index ["public_key"], name: "index_users_on_public_key", unique: true
   end
 
   add_foreign_key "source_articles", "articles"

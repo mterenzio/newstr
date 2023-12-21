@@ -4,11 +4,17 @@ class User < ApplicationRecord
   has_many :source_articles, through: :sources
   has_many :articles, -> { distinct }, through: :source_articles
 
-  after_commit :update_friends, on: [:create]
+  after_commit :initialize_user, on: [:create]
 
-  def update_friends
-    puts "Updating friends for #{self.id} #{self.nickname}"
+  scope :daily_email_subscribers, -> { where(subscribed_daily_email: true).where.not(email: nil) }
+
+  def initialize_user
     UpdateFriendsJob.perform_later(self.id)
+    redis = Redis.new
+    if redis.sadd?('authors', self.public_key)
+      puts "Added #{self.public_key} to authors"
+      redis.publish('authors.ping', self.public_key)
+    end
   end
 
   def daily_top_articles

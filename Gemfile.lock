@@ -66,11 +66,16 @@ GEM
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-    addressable (2.8.5)
+    addressable (2.8.1)
       public_suffix (>= 2.0.2, < 6.0)
+    appsignal (3.4.2)
+      rack
     bindex (0.8.1)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
+    brpoplpush-redis_script (0.1.3)
+      concurrent-ruby (~> 1.0, >= 1.0.5)
+      redis (>= 1.0, < 6)
     builder (3.2.4)
     capybara (3.39.2)
       addressable
@@ -82,15 +87,58 @@ GEM
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
     concurrent-ruby (1.2.2)
+    connection_pool (2.4.0)
     crass (1.0.6)
     date (3.3.3)
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    domain_name (0.5.20190701)
+      unf (>= 0.0.5, < 1.0.0)
+    domainatrix (0.0.11)
+      addressable
     erubi (1.12.0)
+    et-orbi (1.2.7)
+      tzinfo
+    ethon (0.16.0)
+      ffi (>= 1.15.0)
+    faraday (2.7.4)
+      faraday-net_http (>= 2.0, < 3.1)
+      ruby2_keywords (>= 0.0.4)
+    faraday-cookie_jar (0.0.7)
+      faraday (>= 0.8.0)
+      http-cookie (~> 1.0.0)
+    faraday-encoding (0.0.5)
+      faraday
+    faraday-follow_redirects (0.3.0)
+      faraday (>= 1, < 3)
+    faraday-gzip (1.0.0)
+      faraday (>= 1.0)
+      zlib (~> 2.1)
+    faraday-http-cache (2.5.0)
+      faraday (>= 0.8)
+    faraday-net_http (3.0.2)
+    faraday-retry (2.1.0)
+      faraday (~> 2.0)
+    fastimage (2.2.6)
+    ferrum (0.13)
+      addressable (~> 2.5)
+      concurrent-ruby (~> 1.1)
+      webrick (~> 1.7)
+      websocket-driver (>= 0.6, < 0.8)
     ffi (1.15.5)
+    friendly_id (5.4.2)
+      activerecord (>= 4.0.0)
+    fugit (1.8.1)
+      et-orbi (~> 1, >= 1.2.7)
+      raabro (~> 1.4)
     globalid (1.2.1)
       activesupport (>= 6.1)
+    http-cookie (1.0.5)
+      domain_name (~> 0.5)
+    httparty (0.21.0)
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     importmap-rails (1.2.1)
@@ -103,6 +151,7 @@ GEM
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
+    json (2.6.3)
     loofah (2.21.4)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -113,10 +162,24 @@ GEM
       net-smtp
     marcel (1.0.2)
     matrix (0.4.2)
+    metainspector (5.14.0)
+      addressable (~> 2.8)
+      faraday (~> 2.5)
+      faraday-cookie_jar (~> 0.0)
+      faraday-encoding (~> 0.0)
+      faraday-follow_redirects (~> 0.3)
+      faraday-gzip (>= 0.1, < 2.0)
+      faraday-http-cache (~> 2.4)
+      faraday-retry (~> 2.0)
+      fastimage (~> 2.2)
+      nesty (~> 1.0)
+      nokogiri (~> 1.13)
     method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.20.0)
     msgpack (1.7.2)
+    multi_xml (0.6.0)
+    nesty (1.0.2)
     net-imap (0.4.2)
       date
       net-protocol
@@ -130,11 +193,16 @@ GEM
     nokogiri (1.15.4-x86_64-darwin)
       racc (~> 1.4)
     pg (1.5.4)
+    postrank-uri (1.0.16)
+      addressable (>= 2.3.0)
+      domainatrix
+      nokogiri
     psych (5.1.1.1)
       stringio
     public_suffix (5.0.3)
     puma (5.6.7)
       nio4r (~> 2.0)
+    raabro (1.4.0)
     racc (1.7.1)
     rack (2.2.8)
     rack-test (2.1.0)
@@ -160,6 +228,10 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    rails_autolink (1.1.8)
+      actionview (> 3.1)
+      activesupport (> 3.1)
+      railties (> 3.1)
     railties (7.0.8)
       actionpack (= 7.0.8)
       activesupport (= 7.0.8)
@@ -171,11 +243,16 @@ GEM
     rdoc (6.5.0)
       psych (>= 4.0.0)
     redis (4.8.1)
+    redis-client (0.14.1)
+      connection_pool
     regexp_parser (2.8.2)
     reline (0.3.9)
       io-console (~> 0.5)
     rexml (3.2.6)
+    ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
+    rufus-scheduler (3.8.2)
+      fugit (~> 1.1, >= 1.1.6)
     sassc (2.4.0)
       ffi (~> 1.9)
     sassc-rails (2.1.2)
@@ -188,6 +265,23 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
+    sendinblue (2.4)
+      httparty
+      json
+    sidekiq (7.1.0)
+      concurrent-ruby (< 2)
+      connection_pool (>= 2.3.0)
+      rack (>= 2.2.4)
+      redis-client (>= 0.14.0)
+    sidekiq-scheduler (5.0.2)
+      rufus-scheduler (~> 3.2)
+      sidekiq (>= 6, < 8)
+      tilt (>= 1.4.0)
+    sidekiq-unique-jobs (8.0.2)
+      brpoplpush-redis_script (> 0.1.1, <= 2.0.0)
+      concurrent-ruby (~> 1.0, >= 1.0.5)
+      sidekiq (>= 7.0.0, < 8.0.0)
+      thor (>= 1.0, < 3.0)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -205,8 +299,13 @@ GEM
       actionpack (>= 6.0.0)
       activejob (>= 6.0.0)
       railties (>= 6.0.0)
+    typhoeus (1.4.0)
+      ethon (>= 0.9.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.8.2)
     web-console (4.2.1)
       actionview (>= 6.0.0)
       activemodel (>= 6.0.0)
@@ -216,6 +315,7 @@ GEM
       nokogiri (~> 1.6)
       rubyzip (>= 1.3.0)
       selenium-webdriver (~> 4.0, < 4.11)
+    webrick (1.8.1)
     websocket (1.2.10)
     websocket-driver (0.7.6)
       websocket-extensions (>= 0.1.0)
@@ -223,25 +323,38 @@ GEM
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.6.12)
+    zlib (2.1.1)
 
 PLATFORMS
   x86_64-darwin-21
 
 DEPENDENCIES
+  addressable (~> 2.8.1)
+  appsignal
   bootsnap
   capybara
   debug
+  ferrum
+  friendly_id (~> 5.4.0)
   importmap-rails
   jbuilder
+  metainspector
   pg (~> 1.1)
+  postrank-uri
   puma (~> 5.0)
   rails (~> 7.0.4, >= 7.0.4.3)
+  rails_autolink
   redis (~> 4.0)
   sassc-rails
   selenium-webdriver
+  sendinblue
+  sidekiq
+  sidekiq-scheduler
+  sidekiq-unique-jobs
   sprockets-rails
   stimulus-rails
   turbo-rails
+  typhoeus
   tzinfo-data
   web-console
   webdrivers

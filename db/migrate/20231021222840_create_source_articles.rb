@@ -4,7 +4,7 @@ class CreateSourceArticles < ActiveRecord::Migration[7.0]
       t.references :source, index: true, foreign_key: true
       t.references :article, index: true, foreign_key: true
       t.jsonb :note
-      t.boolean :repost, default: false, null: false
+      t.boolean :is_repost, default: false, null: false
 
       t.timestamps
     end
