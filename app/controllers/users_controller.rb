@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def login
-    render
+    render :layout => 'daily_news'
   end
 
   def authenticate
