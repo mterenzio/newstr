@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
   get "/feeds/:npub", to: "feed#feed"
   get "/notes/:note_id", to: "notes#note"
+  get "/profile/:npub", to: "profiles#profile"
   get "/public", to: "feed#public", as: :public
   # Defines the root path route ("/")
   root "home#index"

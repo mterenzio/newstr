@@ -12,7 +12,7 @@ class FeedController < ApplicationController
     @page_url = "https://newstr.news/feed/<%= @rss_token %>"
 
     respond_to do |format|
-      format.html { render :layout => false }
+      format.html { render :layout => "daily_news" }
       format.rss { render :layout => false }
       format.atom { render :layout => false }
       format.json { render :layout => false }

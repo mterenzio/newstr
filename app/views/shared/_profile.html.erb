@@ -22,8 +22,9 @@
     </tr>
     <tr>
         <td align="left" valign="top">
-<a href="/profile/<%= @source.npub %>"><img src="<%= profile_image(@source) %>" width="30px" height="30px" style="border-radius: 10px; margin-right: 3px;" /></a>
-<p><%= h auto_link(simple_format(note_content(@source_article))) %></p>
+<img src="<%= profile_image(@source) %>" width="30px" height="30px" style="border-radius: 10px; margin-right: 3px;" />
+<p><%= @source.profile['name'] %></p>
+<p><%= @source.profile['npub'] %></p>
         </td>  
     </tr>
 </table>
@@ -34,3 +35,5 @@
            </td>
       </tr>
  </table>
+
+

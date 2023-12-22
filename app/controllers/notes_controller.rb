@@ -7,7 +7,7 @@ class NotesController < ApplicationController
     render :status => 404 if !@note || !@source and return
 
     respond_to do |format|
-      format.html { render :layout => false }
+      format.html { render :layout => 'daily_news' }
     end
   end
 end
